@@ -17,6 +17,11 @@ sudo ./docker-install.sh
 ./install.sh
 ```
 
+## Dump database
+```bash
+./dump.sh
+```
+
 ## Components
 * mongodb
 * nginx
