@@ -1,37 +1,42 @@
-## Welcome to GitHub Pages
+## Description
+Grapefruit — is a bittorrent dht crawler & search engine
 
-You can use the [editor on GitHub](https://github.com/bashkirtsevich/grapefruit/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Installation
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### Install Docker
+```bash
+# exec with superuser permissions
+yum install -y yum-utils device-mapper-persistent-data lvm2 git
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum install docker-ce
+systemctl start docker
+systemctl enable docker
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Start containers
+```basah
+sudo docker network create gf-net
+mkdir grapefruit-db
+sudo docker run -d -v ~/grapefruit-db:/data/db --restart unless-stopped --network gf-net --name mongodb mongo
+git clone https://github.com/bashkirtsevich/grapefruit-web.git
+cd grapefruit-web/
+sudo docker build -t grapefruit-web .
+sudo docker run -d --restart unless-stopped --network gf-net --name grapefruit-web grapefruit-web
+cd -
+git clone https://github.com/bashkirtsevich/grapefruit-crawler.git
+cd grapefruit-crawler/
+sudo docker build -t grapefruit-crawler .
+sudo docker run -d -p 6881:6881 --restart unless-stopped --network gf-net --name grapefruit-crawler grapefruit-crawler
+cd -
+mkdir nginx
+mkdir nginx-logs
+sudo docker run -d -p 80:80 -v ~/nginx:/etc/nginx/ -v ~/nginx-logs:/var/log/nginx --network gf-net --name nginx nginx
+```
 
-### Jekyll Themes
+## Tools
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/bashkirtsevich/grapefruit/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Dump database
+```bash
+mkdir dumps
+sudo docker run --rm --name mongo-dump -v ~/dumps:/dumps --network gf-net --entrypoint mongodump mongo --host mongodb --db grapefruit --out /dumps
+```
