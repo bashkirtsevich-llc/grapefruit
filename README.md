@@ -1,5 +1,5 @@
 # Grapefruit
-Grapefruit — as a bittorrent search spyder crawler search engine, based on dht-bittorrent network.
+Grapefruit — is a bittorrent search spyder crawler search engine, based on dht-bittorrent network.
 
 ## Installation
 1. Download grapefruit installer repository
