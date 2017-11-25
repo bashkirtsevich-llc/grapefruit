@@ -1,42 +1,29 @@
-## Description
-Grapefruit — is a bittorrent dht crawler & search engine
+# Grapefruit
+Grapefruit — as a bittorrent search spyder crawler search engine, based on dht-bittorrent network.
 
 ## Installation
-
-### Install Docker
+1. Download grapefruit installer repository
 ```bash
-# exec with superuser permissions
-yum install -y yum-utils device-mapper-persistent-data lvm2 git
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum install docker-ce
-systemctl start docker
-systemctl enable docker
+git clone https://github.com/bashkirtsevich/grapefruit.git
+cd grapefruit
 ```
-
-### Start containers
-```basah
-sudo docker network create gf-net
-mkdir grapefruit-db
-sudo docker run -d -v ~/grapefruit-db:/data/db --restart unless-stopped --network gf-net --name mongodb mongo
-git clone https://github.com/bashkirtsevich/grapefruit-web.git
-cd grapefruit-web/
-sudo docker build -t grapefruit-web .
-sudo docker run -d --restart unless-stopped --network gf-net --name grapefruit-web grapefruit-web
-cd -
-git clone https://github.com/bashkirtsevich/grapefruit-crawler.git
-cd grapefruit-crawler/
-sudo docker build -t grapefruit-crawler .
-sudo docker run -d -p 6881:6881 --restart unless-stopped --network gf-net --name grapefruit-crawler grapefruit-crawler
-cd -
-mkdir nginx
-mkdir nginx-logs
-sudo docker run -d -p 80:80 -v ~/nginx:/etc/nginx/ -v ~/nginx-logs:/var/log/nginx --network gf-net --name nginx nginx
-```
-
-## Tools
-
-### Dump database
+2. Install Docker (optional)
 ```bash
-mkdir dumps
-sudo docker run --rm --name mongo-dump -v ~/dumps:/dumps --network gf-net --entrypoint mongodump mongo --host mongodb --db grapefruit --out /dumps
+# For Centos-7
+sudo ./docker-install.sh
 ```
+3. Build & run all
+```bash
+./install.sh
+```
+
+## Dump database
+```bash
+./dump.sh
+```
+
+## Components
+* mongodb
+* nginx
+* grapefruit-crawler
+* grapefruit-web
