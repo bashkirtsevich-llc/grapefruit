@@ -11,6 +11,7 @@ cd grapefruit
 ```bash
 # For Centos-7
 sudo ./docker-install.sh
+sudo usermod -aG docker $USER
 sudo reboot
 ```
 3. Build & run all
