@@ -1,10 +1,10 @@
 REPO_PATH=$(pwd)
 
 cd $REPO_PATH/grapefruit-web/
-docker build -t grapefruit-web .
+docker build --no-cache -t grapefruit-web .
 
 cd $REPO_PATH/grapefruit-crawler/
-docker build -t grapefruit-crawler .
+docker build --no-cache -t grapefruit-crawler .
 
 docker network create gf-net
 
