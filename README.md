@@ -26,6 +26,6 @@ sudo reboot
 
 ## Components
 * mongodb
-* nginx
+* nginx (_optional;_ useful as https proxy and cache)
 * grapefruit-crawler
 * grapefruit-web
