@@ -24,6 +24,8 @@ services:
     build:
       context: .
       dockerfile: crawler.dockerfile
+    ports:
+    - "6881:6881/udp"
     depends_on:
     - mongodb
     restart: unless-stopped
