@@ -14,14 +14,9 @@ sudo ./docker-install.sh
 sudo usermod -aG docker $USER
 sudo reboot
 ```
-3. Build & run all
+3. Start application
 ```bash
-./install.sh
-```
-
-## Dump database
-```bash
-./dump.sh
+./startup.sh
 ```
 
 ## Components
