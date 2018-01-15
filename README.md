@@ -1,6 +1,8 @@
-# Grapefruit
-![logo](https://github.com/bashkirtsevich/grapefruit-web/blob/master/static/logo.png)
+<p align="center">
+  <img src="https://github.com/bashkirtsevich/grapefruit-web/blob/master/static/logo.png">
+</p>
 
+# Grapefruit
 Grapefruit — is a bittorrent search spyder crawler search engine, based on dht-bittorrent network.
 
 ## Installation
