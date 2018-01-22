@@ -17,6 +17,8 @@ services:
     build:
       context: .
       dockerfile: webform.dockerfile
+    environment:
+      - "MONGODB_URL=mongodb://mongodb:27017/grapefruit"
     depends_on:
     - mongodb
     restart: unless-stopped
@@ -24,6 +26,8 @@ services:
     build:
       context: .
       dockerfile: crawler.dockerfile
+    environment:
+      - "MONGODB_URL=mongodb://mongodb:27017/grapefruit"
     ports:
     - "6881:6881/udp"
     depends_on:
