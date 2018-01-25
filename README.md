@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/bashkirtsevich/grapefruit-web/blob/master/static/logo.png">
+  <img src="https://raw.githubusercontent.com/bashkirtsevich-llc/grapefruit-web/master/static/logo.png">
 </p>
 
 # Grapefruit
