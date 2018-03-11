@@ -3,6 +3,8 @@ services:
   nginx-proxy:
     image: jwilder/nginx-proxy
     volumes:
+#      - "/path/to/htpasswd:/etc/nginx/htpasswd"
+#      - "path/to/certs:/etc/nginx/certs"
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
       - "./logs:/var/log/nginx"
     ports:
