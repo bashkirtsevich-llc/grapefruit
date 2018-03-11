@@ -6,26 +6,31 @@
 Grapefruit — is a bittorrent search spyder crawler search engine, based on dht-bittorrent network.
 
 ## Installation
-1. Download grapefruit installer repository
+1. Install Docker (optional)
 ```bash
-git clone https://github.com/bashkirtsevich/grapefruit.git
-cd grapefruit
+# For Centos-7 (as root user)
+curl https://raw.githubusercontent.com/bashkirtsevich-llc/grapefruit/master/tools/docker-install.sh | /bin/bash
+usermod -aG docker $USER
+reboot
 ```
-2. Install Docker (optional)
+2. Download grapefruit docker compose file
 ```bash
-# For Centos-7
-cd tools/
-sudo ./docker-install.sh
-sudo usermod -aG docker $USER
-sudo reboot
+wget https://raw.githubusercontent.com/bashkirtsevich-llc/grapefruit/master/docker-compose.yml
 ```
-3. Start application
+3. Add SSL certs in `nginx-proxy` (optional)
+```
+...
+    volumes:
+      - "/path/to/htpasswd:/etc/nginx/htpasswd"
+      - "path/to/certs:/etc/nginx/certs"
+```
+4. Start application
 ```bash
-./startup.sh
+docker-compose up -d
 ```
 
 ## Components
 * mongodb
-* nginx (_optional;_ useful as https proxy and cache)
-* grapefruit-crawler
-* grapefruit-web
+* nginx-proxy
+* [grapefruit-crawler](https://hub.docker.com/r/bashkirtsevich/grapefruit-crawler/)
+* [grapefruit-web](https://hub.docker.com/r/bashkirtsevich/grapefruit-web/)
