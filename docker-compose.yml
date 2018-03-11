@@ -3,33 +3,43 @@ services:
   nginx:
     image: nginx
     volumes:
-    - "./nginx.conf:/etc/nginx/nginx.conf:ro"
-    - "./logs:/var/log/nginx"
+      - "./nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./logs:/var/log/nginx"
     ports:
-    - "80:80"
+      - "80:80"
     restart: unless-stopped
+    networks:
+      - frontend
   mongodb:
     image: mongo
     volumes:
-    - "./db:/data/db"
+      - "./db:/data/db"
     restart: unless-stopped
+    networks:
+      - backend
   grapefruit-web:
-    build:
-      context: .
-      dockerfile: webform.dockerfile
+    image: bashkirtsevich/grapefruit-web
     environment:
       - "MONGODB_URL=mongodb://mongodb:27017/grapefruit"
     depends_on:
-    - mongodb
+      - mongodb
     restart: unless-stopped
+    networks:
+      - frontend
+      - backend
   grapefruit-crawler:
-    build:
-      context: .
-      dockerfile: crawler.dockerfile
+    image: bashkirtsevich/grapefruit-crawler
     environment:
       - "MONGODB_URL=mongodb://mongodb:27017/grapefruit"
     ports:
-    - "6881:6881/udp"
+      - "6881:6881/udp"
     depends_on:
-    - mongodb
+      - mongodb
     restart: unless-stopped
+    networks:
+      - backend
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
