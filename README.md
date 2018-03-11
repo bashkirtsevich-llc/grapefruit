@@ -14,6 +14,7 @@ cd grapefruit
 2. Install Docker (optional)
 ```bash
 # For Centos-7
+cd tools/
 sudo ./docker-install.sh
 sudo usermod -aG docker $USER
 sudo reboot
