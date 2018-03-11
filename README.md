@@ -18,14 +18,14 @@ reboot
 wget https://raw.githubusercontent.com/bashkirtsevich-llc/grapefruit/master/docker-compose.yml
 ```
 3. Add SSL certs in `nginx-proxy` in `docker-compose.yml` (optional)
-```
+```yaml
 ...
     volumes:
       - "/path/to/htpasswd:/etc/nginx/htpasswd"
       - "path/to/certs:/etc/nginx/certs"
 ```
 4. Set virtual host name in `docker-compose.yml`
-```
+```yaml
 ...
     environment:
       - "VIRTUAL_HOST=grapefruit.your.domain"
