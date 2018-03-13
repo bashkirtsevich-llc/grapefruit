@@ -23,8 +23,6 @@ services:
       - backend
   grapefruit-web:
     image: bashkirtsevich/grapefruit-web
-    expose:
-      - "8080"
     environment:
       - "VIRTUAL_HOST=grapefruit.localhost.nip.io"
       - "VIRTUAL_PORT=8080"
