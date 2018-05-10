@@ -37,6 +37,8 @@ services:
     image: bashkirtsevich/grapefruit-crawler
     environment:
       - "MONGODB_URL=mongodb://mongodb:27017/grapefruit"
+      - "SOCKET_HOST=0.0.0.0"
+      - "SOCKET_PORT=6881"
     ports:
       - "6881:6881/udp"
     depends_on:
