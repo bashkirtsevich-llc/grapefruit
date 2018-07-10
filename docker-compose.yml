@@ -1,7 +1,7 @@
 version: "3"
 services:
   nginx-proxy:
-    image: jwilder/nginx-proxy
+    image: jwilder/nginx-proxy:alpine
     volumes:
 #      - "/path/to/htpasswd:/etc/nginx/htpasswd"
 #      - "path/to/certs:/etc/nginx/certs"
